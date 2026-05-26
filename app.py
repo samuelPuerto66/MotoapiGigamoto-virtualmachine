@@ -23,6 +23,14 @@ def peritajes():
           return jsonify({"msj": "OK"}), 201
   return jsonify(datos)
 
+@app.route('/api/inventario', methods=['GET'])
+def inventario():
+    inventario = [
+        {"producto": "Aceite", "stock": 10},
+        {"producto": "Llantas", "stock": 5}
+    ]
+    return jsonify(inventario)
+
 if __name__ == "__main__":
         app.run(host='0.0.0.0', port=8000)
 
