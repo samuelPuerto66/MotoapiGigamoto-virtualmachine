@@ -2,8 +2,7 @@ from flask import Flask, jsonify, request
 from datetime import datetime
 import json, os
 
-
-app =  Flask (__name__)
+app = Flask(__name__)
 DB = 'peritajes.json'
 
 def handle_db(data=None):
@@ -14,16 +13,27 @@ def handle_db(data=None):
 
 @app.route('/api/peritajes', methods=['GET','POST'])
 def peritajes():
-  datos = handle_db()
-  if request.method == 'POST':
-          nuevo = request .get_json()
-          nuevo['fecha'] = datetime.now().strftime("%H:%M:%S")
-          datos.append(nuevo)
-          handle_db(datos)
-          return jsonify({"msj": "OK"}), 201
-  return jsonify(datos)
+
+    datos = handle_db()
+
+    if request.method == 'POST':
+
+        nuevo = request.get_json()
+
+        # HOTFIX DE PRODUCCION
+        if 'placa' in nuevo:
+            nuevo['placa'] = nuevo['placa'].upper()
+
+        nuevo['fecha'] = datetime.now().strftime("%H:%M:%S")
+
+        datos.append(nuevo)
+
+        handle_db(datos)
+
+        return jsonify({"msj": "OK"}), 201
+
+    return jsonify(datos)
 
 if __name__ == "__main__":
-        app.run(host='0.0.0.0', port=8000)
-
+    app.run(host='0.0.0.0', port=8000)
 
