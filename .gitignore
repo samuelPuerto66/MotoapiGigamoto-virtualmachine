@@ -1,1 +1,21 @@
+# ==========================================
+# REGLAS DE EXCLUSIÓN - GigaMoto
+# ==========================================
+
+# 1. Ignorar entornos virtuales (Nunca deben subirse)
 venv/
+ENV/
+env/ [cite: 38, 39]
+
+# 2. Ignorar archivos de caché de ejecución de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd [cite: 41, 42, 43, 44]
+
+# 3. Ignorar bases de datos locales de desarrollo
+*.sqlite3 [cite: 45]
+
+# 4. Ignorar archivos del sistema operativo
+.DS_Store
+Thumbs.db [cite: 47, 48]
